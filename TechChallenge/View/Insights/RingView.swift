@@ -10,22 +10,19 @@ import SwiftUI
 fileprivate typealias Category = TransactionModel.Category
 
 struct RingView: View {
+    
+    @ObservedObject var viewModel:TransactionViewModel
+    
     let transactions: [TransactionModel]
     
     private func ratio(for categoryIndex: Int) -> Double {
-        // TODO: calculate ratio for each category according to cummulative expense
-        
-        // Returning sample value
-        0.2
+        return viewModel.getCategorySpendRatio(categoryIndex: categoryIndex)
     }
     
     private func offset(for categoryIndex: Int) -> Double {
-        // TODO: calculate offset for each category according to cummulative expense
-        
-        // Returning sample value
-        Double(categoryIndex) * 0.2
+        return viewModel.getCategorySpentOffset(categoryIndex: categoryIndex)
     }
-
+    
     private func gradient(for categoryIndex: Int) -> AngularGradient {
         let color = Category[categoryIndex]?.color ?? .black
         return AngularGradient(
@@ -53,17 +50,17 @@ struct RingView: View {
                     offset: offset(for: categoryIndex),
                     ratio: ratio(for: categoryIndex)
                 )
-                .stroke(
-                    gradient(for: categoryIndex),
-                    style: StrokeStyle(lineWidth: 28.0, lineCap: .butt)
-                )
-                .overlay(
-                    PercentageText(
-                        offset: offset(for: categoryIndex),
-                        ratio: ratio(for: categoryIndex),
-                        text: percentageText(for: categoryIndex)
+                    .stroke(
+                        gradient(for: categoryIndex),
+                        style: StrokeStyle(lineWidth: 28.0, lineCap: .butt)
                     )
-                )
+                    .overlay(
+                        PercentageText(
+                            offset: offset(for: categoryIndex),
+                            ratio: ratio(for: categoryIndex),
+                            text: percentageText(for: categoryIndex)
+                        )
+                    )
             }
         }
     }
@@ -115,7 +112,7 @@ struct RingView_Previews: PreviewProvider {
                     Color.green,
                     style: StrokeStyle(lineWidth: 28.0, lineCap: .butt)
                 )
-                
+            
             RingView.PartialCircleShape(offset: 0.65, ratio: 0.35)
                 .stroke(
                     Color.blue,
@@ -129,7 +126,7 @@ struct RingView_Previews: PreviewProvider {
             sampleRing
                 .scaledToFit()
             
-            RingView(transactions: ModelData.sampleTransactions)
+            RingView(viewModel: TransactionViewModel(transactions:ModelData.sampleTransactions), transactions: ModelData.sampleTransactions)
                 .scaledToFit()
         }
         .padding()

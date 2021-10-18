@@ -16,7 +16,7 @@ struct InsightsView: View {
     
     var body: some View {
         List {
-            RingView(transactions: transactions)
+            RingView(viewModel:viewModel, transactions: transactions)
                 .scaledToFit()
             
             ForEach(TransactionModel.Category.allCases) { category in
@@ -37,10 +37,10 @@ struct InsightsView: View {
 }
 
 #if DEBUG
-//struct InsightsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        InsightsView()
-//            .previewLayout(.sizeThatFits)
-//    }
-//}
+struct InsightsView_Previews: PreviewProvider {
+    static var previews: some View {
+        InsightsView(viewModel: TransactionViewModel(transactions:ModelData.sampleTransactions))
+            .previewLayout(.sizeThatFits)
+    }
+}
 #endif

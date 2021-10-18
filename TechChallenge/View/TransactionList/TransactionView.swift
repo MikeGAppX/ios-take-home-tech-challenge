@@ -12,7 +12,7 @@ struct TransactionView: View {
     
     @ObservedObject var viewModel:TransactionViewModel
     var transaction: TransactionModel
-    @State var isPinned  = true
+    @State var isPinned  = false
     
     var body: some View {
         VStack {
@@ -26,11 +26,12 @@ struct TransactionView: View {
                     self.isPinned.toggle()
                     viewModel.updateTotalSpent.toggle()
                 }) {
-                    self.isPinned ? Image( systemName: "pin.fill") : Image( systemName: "pin.slash.fill")
+                    Image(systemName:self.isPinned == true ? "pin.slash.fill" : "pin.fill")
+
                 }
             }
             
-            if transaction.isPinned {
+            if !transaction.isPinned {
                 HStack {
                     transaction.image
                         .resizable()
@@ -71,8 +72,8 @@ struct TransactionView_Previews: PreviewProvider {
     
     static var previews: some View {
         VStack {
-            //            TransactionView(transaction: ModelData.sampleTransactions[0], updateSpentView: true)
-            //            TransactionView(transaction: ModelData.sampleTransactions[1], updateSpentView: true)
+            TransactionView(viewModel:TransactionViewModel(transactions:ModelData.sampleTransactions), transaction: ModelData.sampleTransactions[0])
+            TransactionView(viewModel:TransactionViewModel(transactions:ModelData.sampleTransactions), transaction: ModelData.sampleTransactions[1])
         }
         .padding()
         .previewLayout(.sizeThatFits)

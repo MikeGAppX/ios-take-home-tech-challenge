@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import SwiftUI
+
 
 // MARK: - TransactionModel
 
@@ -41,7 +43,7 @@ class TransactionModel: ObservableObject {
     let accountName: String
     let provider: Provider?
     
-    @Published var isPinned:Bool = true
+    @Published var isPinned:Bool = false
     
     init(id:Int,
          name:String,

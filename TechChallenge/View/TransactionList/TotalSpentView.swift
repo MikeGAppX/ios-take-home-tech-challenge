@@ -22,12 +22,8 @@ struct TotalSpentView: View {
                 }else {
                     Text("\(viewModel.sCategory)")
                         .font(.headline)
-                    //                    .foregroundColor
-                    //                    .foregroundColor(selectedCategory.color)
                 }
-                
-            } // SHOULD FOLOW TAG Colour
-            //Add tag color
+            }
             HStack {
                 Text("Total Spent:")
                     .fontWeight(.regular)
@@ -35,8 +31,6 @@ struct TotalSpentView: View {
                 Spacer()
                 Text("$ \(viewModel.getTotalSpent(for: viewModel.sCategory))")
                     .fontWeight(.bold)
-                //                    .font() SYSTEM FONT
-                
             }
         }
         .padding()
@@ -47,10 +41,11 @@ struct TotalSpentView: View {
         
     }
 }
-    //struct TotalSpentView_Previews: PreviewProvider {
-    //    static var previews: some View {
-    //        TotalSpentView()
-    //    }
-    //}
+
+struct TotalSpentView_Previews: PreviewProvider {
+    static var previews: some View {
+        TotalSpentView(viewModel: TransactionViewModel(transactions:ModelData.sampleTransactions))
+    }
+}
 
 

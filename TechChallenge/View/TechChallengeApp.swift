@@ -10,24 +10,9 @@ import SwiftUI
 @main
 struct TechChallengeApp: App {
     
-    let vm  = TransactionViewModel()
     var body: some Scene {
         WindowGroup {
-            TabView {
-                NavigationView {
-                    TransactionListView(viewModel: vm)
-                }
-                .tabItem {
-                    Label("Transactions", systemImage: "list.bullet")
-                }
-                
-                NavigationView {
-                    InsightsView(viewModel: vm)
-                }
-                .tabItem {
-                    Label("Insights", systemImage: "chart.pie.fill")
-                }
-            }
+            CoordinatorView(object: Coordinator())
         }
     }
 }
