@@ -20,12 +20,13 @@ struct TransactionListView: View {
             Spacer()
             
             List {
-                ForEach(viewModel.filtereCategories(for: viewModel.sCategory)) { transaction in
+                ForEach(viewModel.filtereCategories(for: viewModel.selectedCategory?.rawValue ?? "")) { transaction in
                     TransactionView(viewModel: viewModel, transaction: transaction)
                 }
             }
             
-            TotalSpentView(viewModel: viewModel).frame(height:70, alignment: .bottom)
+            TotalSpentView(viewModel: viewModel).frame( alignment: .bottom)
+                .padding(.horizontal)
             
         }
         .animation(.easeIn)
@@ -33,8 +34,8 @@ struct TransactionListView: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("Transactions")
     }
-        
-
+    
+    
 }
 
 #if DEBUG
@@ -44,4 +45,6 @@ struct TransactionListView_Previews: PreviewProvider {
     }
 }
 #endif
+
+
 

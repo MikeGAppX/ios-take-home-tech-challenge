@@ -20,7 +20,7 @@ final class TransactionViewModel:ObservableObject, TransactionViewModelType {
     
     @Published var transactions: [TransactionModel]
     @Published var updateTotalSpent = true
-    @Published var sCategory:String = ""
+    @Published var selectedCategory:TransactionModel.Category?
     
     init(transactions:[TransactionModel]) {
         self.transactions = transactions

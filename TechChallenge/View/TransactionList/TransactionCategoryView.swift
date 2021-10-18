@@ -16,26 +16,26 @@ struct TransactionCategoryView: View {
             HStack(alignment: .center) {
                 
                 Button(action: {
-                    viewModel.sCategory = ""
+                    viewModel.selectedCategory = nil
                 }) {
-                    Text("All")
+                    Text(Constants.all)
                         .font(.title2)
                         .fontWeight(.bold)
                         .padding(/*@START_MENU_TOKEN@*/.horizontal, 5.0/*@END_MENU_TOKEN@*/)
                 }
-                .padding(/*@START_MENU_TOKEN@*/.all, 5.0/*@END_MENU_TOKEN@*/)
+                .padding(.all, 5.0)
                 .foregroundColor(.white)
                 .background(Color.black)
                 .cornerRadius(15.0)
                 
                 ForEach(TransactionModel.Category.allCases) { category in
                     Button(action: {
-                        viewModel.sCategory = category.rawValue
+                        viewModel.selectedCategory = category
                     }) {
                         Text(category.rawValue)
                             .font(.title2)
                             .fontWeight(.bold)
-                            .padding(/*@START_MENU_TOKEN@*/.horizontal, 5.0/*@END_MENU_TOKEN@*/)
+                            .padding(.horizontal, 5.0)
                     }
                     .padding(/*@START_MENU_TOKEN@*/.all, 5.0/*@END_MENU_TOKEN@*/)
                     .foregroundColor(.white)

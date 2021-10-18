@@ -16,21 +16,23 @@ struct TotalSpentView: View {
         VStack {
             HStack {
                 Spacer()
-                if(viewModel.sCategory == ""){
-                    Text("all")
-                        .font(.headline)
+                
+                if let selectedCategory = viewModel.selectedCategory {
+                    Text("\(selectedCategory.rawValue)")
+                        .font(.headline).foregroundColor(selectedCategory.color)
                 }else {
-                    Text("\(viewModel.sCategory)")
+                    Text(Constants.all)
                         .font(.headline)
                 }
             }
             HStack {
-                Text("Total Spent:")
+                Text(Constants.totalSpent)
                     .fontWeight(.regular)
-                //                    .labelStyle(.secondary)  CUSTOM SECONDARY HERE
+                    .secondary()
                 Spacer()
-                Text("$ \(viewModel.getTotalSpent(for: viewModel.sCategory))")
+                Text("$ \(viewModel.getTotalSpent(for: viewModel.selectedCategory?.rawValue ?? ""))")
                     .fontWeight(.bold)
+                    
             }
         }
         .padding()
@@ -47,5 +49,3 @@ struct TotalSpentView_Previews: PreviewProvider {
         TotalSpentView(viewModel: TransactionViewModel(transactions:ModelData.sampleTransactions))
     }
 }
-
-
